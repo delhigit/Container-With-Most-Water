@@ -1,0 +1,29 @@
+//Here is a simple proof for the solution.
+//Use v[low, high] indicates the volume of container with low and high.
+//suppose height[low] < height[high], then we move low to low+1,
+//that means we ingored v[low, high-1],v[low, high-2],etc, if this is safe, 
+//then the algorithm is right, and it's obvious that v[low, high-1],high[low, high-2]......
+//can't be larger than v[low, high] since its width can't be larger than high-low, and its height is limited by height[low].
+
+int Solution::maxArea(vector<int> &height) {
+    // Do not write main() function.
+    // Do not read input, instead use the arguments to the function.
+    // Do not print the output, instead return values as specified
+    // Still have a doubt. Checkout www.interviewbit.com/pages/sample_codes/ for more details
+    
+    int left = 0;
+    int right = height.size() - 1;
+    int maxArea = 0;
+    
+    while(left < right)
+    {
+        maxArea = max(maxArea, min(height[right], height[left])*(right - left));
+        
+        if(height[left] < height[right])
+        left++;
+        
+        else
+        right--;
+    }
+    return maxArea;
+}
